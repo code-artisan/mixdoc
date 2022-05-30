@@ -7,6 +7,8 @@ import { getOriginTemplate, logger } from './utils';
 import jetpack from 'fs-jetpack';
 
 export default (options) => {
+  logger.info('🐞 开始构建。');
+
   const makers = {
     theme: options.makers?.theme || ThemeMaker.make,
     design: options.makers?.design || DesignMaker.make,
