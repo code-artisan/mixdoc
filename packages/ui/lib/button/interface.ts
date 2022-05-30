@@ -8,7 +8,7 @@ export default interface ButtonInterface {
    * children
    * @ignore
    */
-  children?: React.ReactElement;
+  children?: String | React.ReactElement;
 
   /**
    * 点击回调
