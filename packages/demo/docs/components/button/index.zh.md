@@ -86,34 +86,12 @@ group:
 
 ## API
 
-### Button
-
-### type 
-按钮类型。
-
-默认值：--
-
-|required|type|platform|
-|----|----|----|
-|false|`'primary' \| 'warning' \| 'default' \| 'ghost' \| 'secondary'`|Web、iOS、Android|
-
-### onPress 
-点击回调
-
-默认值：--
-
-|required|type|platform|
-|----|----|----|
-|false|`() => void`|Web、iOS、Android|
 
 
 ## 主题变量
 
 <div class="theme-variable-table">
 
-| 变量名 | 默认值 | 说明 |
-| -------- | -------- | -------- |
-| $button_fill | #f00 |  按钮填充色 |
-| $button_border_radius | 8 |  按钮圆角尺寸 |
+undefined
 
 </div>

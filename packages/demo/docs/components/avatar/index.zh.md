@@ -34,46 +34,12 @@ group:
 
 ## API
 
-### Avatar
-
-### size 
-按钮类型。
-
-默认值：--
-
-|required|type|platform|
-|----|----|----|
-|false|`'small' \| 'default' \| 'large'`|Web、iOS、Android|
-
-### text 
-头像文本
-
-默认值：--
-
-|required|type|platform|
-|----|----|----|
-|false|`string`|Web、iOS、Android|
-
-### onPress 
-点击回调
-
-默认值：--
-
-|required|type|platform|
-|----|----|----|
-|false|`() => void`|Web、iOS、Android|
 
 
 ## 主题变量
 
 <div class="theme-variable-table">
 
-| 变量名 | 默认值 | 说明 |
-| -------- | -------- | -------- |
-| $avatar_border_color | #999 |  头像边框色 |
-| $avatar_fill | #ddd |  头像填充色 |
-| $avatar_large_size | 96 |  大号尺寸 |
-| $avatar_default_size | 88 |  默认尺寸 |
-| $avatar_small_size | 80 |  小号尺寸 |
+undefined
 
 </div>
