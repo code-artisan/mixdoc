@@ -9,7 +9,7 @@ export default (props: ButtonInterface) => {
       <View style={styles.button}>
         {
           typeof props.children === 'string' ? (
-            <Text>{props.children}</Text>
+            <Text style={styles.text}>{props.children}</Text>
           ) : props.children
         }
       </View>

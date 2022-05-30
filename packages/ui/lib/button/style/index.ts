@@ -8,6 +8,10 @@ export default EStyleSheet.create({
     borderRadius: '$button_border_radius',
     backgroundColor: '$button_fill',
     paddingVertical: 12,
-    paddingHorizontal: 12
+    paddingHorizontal: 12,
+    textAlign: 'center',
+  },
+  text: {
+    color: '#fff',
   },
 });
