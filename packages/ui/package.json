@@ -1,0 +1,23 @@
+{
+  "name": "@mixdoc/ui",
+  "private": false,
+  "version": "1.0.0",
+  "main": "lib/index.ts",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "artisan",
+  "license": "ISC",
+  "devDependencies": {
+    "react": "^18.1.0",
+    "react-native": "^0.68.2"
+  },
+  "dependencies": {
+    "react": "*",
+    "react-native-extended-stylesheet": "^0.12.0"
+  },
+  "description": ""
+}

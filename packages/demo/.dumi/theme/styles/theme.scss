@@ -1,0 +1,87 @@
+// base color
+$white: #ffffff;
+$border-color-split: rgba(0,0,0,.1);
+
+// 间距
+$h_spacing: 24px;
+
+// 导航头部
+$header-height: 54px;
+
+/* 响应式断点 */
+$v-device-show: 'only screen and (min-width: 961px)';
+$v-device-hide: 'only screen and (max-width: 960px)';
+
+/* 移动设备尺寸 */
+$s-device-gap-top: 20px;
+$s-device-margin-top: 205px;
+$s-device-border-width: 8px;
+$s-device-shell-width: $s-device-border-width + 2px;
+$s-device-content-width: 355px;
+$s-device-content-height: 647px;
+$s-device-width: $s-device-content-width + $s-device-shell-width * 2;
+$s-device-ratio: 19.5 / 9;
+$s-nav-height: 64px;
+
+$slug-list-width: 136px;
+
+// demo 与 slug 间隙
+$x-max-screen-demo-slug-space: 100px;
+$max-screen-demo-slug-space: $x-max-screen-demo-slug-space;
+
+// markdown 中预览代码容器宽度
+$x-max-screen-previewer-width: 900px;
+$max-screen-previewer-width: 750px;
+$mid-screen-previewer-width: 950px - $s-device-content-width;
+$iPad-pro-screen-previewer-width: 930px - $s-device-content-width;
+$iPad-screen-previewer-width: 500px;
+
+
+// 菜单
+$side-bar-width: 280px;
+$side-bar-bg: #FAFAFC;
+$menu-sub-menu-bg: #FAFAFC;
+$menu-item-selected-bg: $white;
+
+// 菜单展示悬浮按钮
+$handle-size: 48px;
+$handle-border-radius: 24px;
+$handle-bottom: 24px;
+$handle-right: -74px;
+$handle-bg: $white;
+$handle-border-width: 1px;
+$handle-border-color: #e5e8f1;
+
+// 显示屏宽度尺寸
+$x-max-screen: 1921px;
+$max-screen: 1920px;
+$mid-screen: 1440px;
+$min-screen: 1366px;
+$iPad-pro: 1024px;
+$iPad: 768px;
+$mobile-device: 414px;
+
+@mixin responsive($width) {
+  @if $width == $max-screen { // 1440 ~ 1920
+    @media only screen and (min-width: $mid-screen + 1) and (max-width: $max-screen) { @content; }
+  }
+  @else if $width == $mid-screen { // 1367 ~ 1440
+    @media only screen and (min-width: $min-screen + 1) and (max-width: $mid-screen) { @content; }
+  }
+  @else if $width == $min-screen { // 1025 ~ 1366, 隐藏 side-bar
+    @media only screen and (min-width: $iPad-pro + 1) and (max-width: $min-screen) { @content; }
+  }
+  @else if $width == $iPad-pro { // 769 ~ 1024, 隐藏 slug-list
+    @media only screen and (min-width: $iPad + 1) and (max-width: $iPad-pro) { @content; }
+  }
+  @else if $width == $iPad { // 415 ~ 768, 内容滑动
+    @media only screen and (min-width: $mobile-device + 1) and (max-width: $iPad) { @content; }
+  }
+  @else if $width == $mobile-device { // < 414, 轮播分页展示
+    @media only screen and (max-width: $mobile-device) { @content; }
+  }
+  @else { // > 1920
+    @media only screen and (min-width: $x-max-screen) { @content; }
+  }
+}
+

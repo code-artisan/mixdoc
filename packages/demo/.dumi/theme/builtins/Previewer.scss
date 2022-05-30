@@ -1,0 +1,58 @@
+@import '../styles/theme.scss';
+
+.__dumi-default-mobile-previewer {
+  border: 1px transparent solid;
+  max-width: 725px;
+
+  &.preview-actived {
+    // border: 1px #495d9e solid;
+  }
+
+  .__dumi-default-previewer-demo {
+    display: none;
+  }
+
+  .__dumi-default-previewer-desc,
+  .__dumi-default-previewer-desc:not([data-title]) + .__dumi-default-previewer-actions {
+    border-top: none;
+  }
+
+  button[role='source'] {
+    margin-right: -8px;
+    width: 0;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+}
+
+@include responsive($x-max-screen) {
+  .__dumi-default-mobile-previewer, .__dumi-default-code-block {
+    max-width: $x-max-screen-previewer-width;
+  }
+}
+
+@include responsive($max-screen) {
+  .__dumi-default-mobile-previewer, .__dumi-default-code-block {
+    max-width: $max-screen-previewer-width;
+  }
+}
+
+@include responsive($mid-screen) {
+  .__dumi-default-mobile-previewer, .__dumi-default-code-block {
+    max-width: $mid-screen-previewer-width;
+  }
+}
+
+@include responsive($iPad-pro) {
+  .__dumi-default-mobile-previewer, .__dumi-default-code-block {
+    max-width: $iPad-pro-screen-previewer-width;
+  }
+}
+
+@include responsive($iPad) {
+  .__dumi-default-mobile-previewer, .__dumi-default-code-block {
+    max-width: $iPad-screen-previewer-width;
+  }
+}
+

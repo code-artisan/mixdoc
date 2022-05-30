@@ -1,0 +1,167 @@
+@import './theme.scss';
+
+.markdown {
+  font-size: 14px;
+  line-height: 2;
+  // overflow: auto;
+  position: relative;
+
+  h1 {
+    margin-top: 8px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    font-size: 30px;
+    // font-family: Avenir, sans-serif;
+    line-height: 38px;
+  }
+
+  h2 {
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    clear: both;
+    margin: 1.6em 0 0.6em;
+    font-weight: 500;
+    // font-family: Avenir, sans-serif;
+  }
+
+  h3 {
+    font-size: 18px;
+  }
+  h4 {
+    font-size: 16px;
+  }
+  h5 {
+    font-size: 14px;
+  }
+  h6 {
+    font-size: 12px;
+  }
+
+  hr {
+    clear: both;
+    height: 1px;
+    margin: 56px 0;
+    background: $border-color-split;
+    border: 0;
+  }
+
+  p,
+  pre {
+    margin: 1em 0;
+  }
+
+  pre > code[class*='language-'] {
+    line-height: 1.8;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  > img,
+  > p > img {
+    max-width: calc(100% - 32px);
+    margin: 34px 0;
+  }
+
+  ul,
+  ol {
+    margin: 0;
+    padding: 0;
+  }
+
+  ul > li {
+    margin-left: 20px;
+    padding-left: 4px;
+    list-style-type: circle;
+    &:empty {
+      display: none;
+    }
+  }
+
+  ol > li {
+    margin-left: 20px;
+    padding-left: 4px;
+    list-style-type: decimal;
+  }
+
+  ul > li > p,
+  ol > li > p {
+    margin: 0.2em 0;
+  }
+
+  strong,
+  b {
+    font-weight: 500;
+  }
+
+  table {
+    max-width: 100%;
+    width: 100%;
+    margin: 24px 0;
+    empty-cells: show;
+    border: 1px solid $border-color-split;
+    border-collapse: collapse;
+    border-spacing: 0;
+    word-wrap: break-word;
+    word-break: break-all;
+
+    img {
+      max-width: 100%;
+    }
+  }
+
+  table th {
+    color: #5c6b77;
+    font-weight: 500;
+    background: rgba(0, 0, 0, 0.02);
+  }
+
+  table th,
+  table td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid $border-color-split;
+    // white-space: nowrap;
+
+    width: 33.33%;
+  }
+
+  blockquote {
+    margin: 1em 0;
+    padding-left: 0.8em;
+    color: fade-out(black, 0.4%);
+    font-size: 90%;
+    border-left: 4px solid $border-color-split;
+  }
+
+  blockquote p {
+    margin: 0;
+  }
+
+  > br,
+  > p > br {
+    clear: both;
+  }
+
+  .carousel {
+    display: none;
+  }
+
+  code {
+    margin: 0 3px;
+    padding: 1px 6px;
+    border-radius: 3px;
+    color: #777;
+    font-size: 12.8px;
+    border: 1px solid #e9e9e9;
+    background-color: #f7f7f7;
+  }
+}

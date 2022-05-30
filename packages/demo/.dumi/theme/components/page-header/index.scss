@@ -1,0 +1,45 @@
+@import '../../styles/theme.scss';
+
+.docs-page-header {
+  width: 100%;
+  padding: 40px 0;
+
+  &--inner {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  &--title {
+    font-family: PingFangSC-Medium;
+    font-size: 36px;
+    color: #1e2026;
+    letter-spacing: 0;
+    line-height: 52px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+
+  &--subtitle {
+    font-family: PingFangSC-Regular;
+    font-size: 20px;
+    color: #5a6071;
+    letter-spacing: 0;
+    line-height: 20px;
+  }
+
+  .ant-breadcrumb-link {
+    font-size: 16px;
+  }
+}
+
+@media only screen and (max-width: $iPad-pro) {
+  .docs-page-header {
+    margin-top: 32px;
+  }
+}
+
+@media only screen and (max-width: $mobile-device) {
+  .docs-page-header {
+    padding-bottom: 0px;
+  }
+}

@@ -1,0 +1,39 @@
+@import '../../styles/theme.scss';
+
+.docs-side-bar {
+  width: $side-bar-width;
+  height: 100%;
+  overflow-y: auto;
+  border-right-width: 0;
+  background-color: $side-bar-bg;
+
+  .ant-menu {
+    background-color: $side-bar-bg;
+  }
+
+  .ant-menu-item,
+  .ant-menu-submenu-title {
+    width: 100% !important;
+  }
+
+  .ant-menu-item {
+    &,
+    &::after {
+      transition: none !important;
+    }
+  }
+
+  .ant-menu-item-selected {
+    background-color: $menu-item-selected-bg !important;
+
+    &::after {
+      transition: none !important;
+    }
+  }
+}
+
+@media screen and (max-width: $max-screen) {
+  .docs-side-bar {
+    width: 240px;
+  }
+}

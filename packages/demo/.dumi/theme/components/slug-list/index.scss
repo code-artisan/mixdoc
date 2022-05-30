@@ -1,0 +1,119 @@
+@import '../../styles/theme.scss';
+
+.docs-slug-list {
+  position: sticky;
+  top: $s-device-gap-top;
+  width: 136px;
+  background: #f8f8fa;
+  border-radius: 8px;
+  font-size: 12px;
+  overflow: auto;
+  padding: 40px 0;
+  margin-top: $s-device-margin-top;
+  margin-left: $h_spacing;
+
+  ul,
+  ol {
+    margin: 0;
+    padding-left: 0;
+  }
+
+  li {
+    list-style: none;
+    height: 16px;
+    line-height: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0 16px;
+    margin-bottom: 8px;
+
+    &>a {
+      font-family: 'PingFangSC-Medium';
+      color: #5A6071;
+    }
+  }
+
+  li.active {
+    &>a {
+      color: #495D9E;
+    }
+
+    &::before {
+      content: '';
+      width: 2px;
+      height: 16px;
+      background-color: #495D9E;
+      position: absolute;
+      left: 0
+    }
+  }
+}
+
+@include responsive($x-max-screen) {
+  .docs-slug-list {
+    margin-left: $x-max-screen-demo-slug-space;
+  }
+}
+
+@include responsive($max-screen) {
+  .docs-slug-list {
+    margin-left: $max-screen-demo-slug-space;
+  }
+}
+
+// @include responsive($iPad-pro) {
+@media screen and (max-width: $iPad-pro) {
+  .docs-slug-list {
+    position: fixed;
+    margin-top: 0;
+    margin-left: 0;
+    top: $header-height;
+    left: 0;
+    right: 0;
+    width: auto;
+    padding: 0;
+    overflow-y: auto;
+    scrollbar-width: none; /* firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+    &::-webkit-scrollbar {
+      display: none; /* Chrome Safari */
+    }
+
+    ul,
+    ol {
+      display: flex;
+      flex-direction: row;
+      padding: 0 8px;
+    }
+
+    li {
+      margin-bottom: 0;
+      height: 32px;
+      line-height: 32px;
+      min-width: fit-content;
+
+      &>a {
+        display: block;
+        width: 100%;
+        text-align: center;
+      }
+    }
+
+    li.active {
+      position: relative;
+
+      &::before {
+        content: '';
+        width: 16px;
+        height: 2px;
+        background-color: #495D9E;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+      }
+    }
+  }
+}
