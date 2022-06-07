@@ -1,8 +1,8 @@
 import path from 'path';
-import { get, isFunction } from 'lodash';
 import jetpack from 'fs-jetpack';
 import generator from '@babel/generator';
 import traverse from '@babel/traverse';
+import { get, isFunction, isString, isPlainObject } from 'lodash';
 import { getAbstractTree } from '../utils';
 
 const getRawTables = (content, component) => {
@@ -24,7 +24,7 @@ const getRawTables = (content, component) => {
         const json = {
           name: '',
           type: '',
-          platform: 'Web、iOS、Android',
+          platform: '',
           required: 'false',
           description: '',
           defaults: '',
@@ -82,16 +82,22 @@ export default {
 
     const filepath = path.resolve(
       process.cwd(),
+      'node_modules',
       options.libSourceCodeWorkspace,
       component,
       options?.property?.filename || 'interface.ts'
     );
 
     if (jetpack.exists(filepath) === 'file') {
-      const result = getRawTables(jetpack.read(filepath, 'utf8'), component);
+      let result = getRawTables(jetpack.read(filepath, 'utf8'), component);
 
+      let response;
       if (isFunction(onFetchComponentProperty)) {
-        return onFetchComponentProperty(result) || result;
+        response = onFetchComponentProperty(result);
+      }
+
+      if (isString(response)) {
+        return response;
       }
 
       const iterator = (key) => {
@@ -103,6 +109,10 @@ export default {
 
         return key === 'default' ? format(rows) : `### ${key}\n\n${format(rows)}`;
       };
+
+      if (isPlainObject(response)) {
+        result = { ...response };
+      }
 
       return Object.keys(result).map(iterator).join('\n\n\n') || '';
     }

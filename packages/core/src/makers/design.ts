@@ -63,6 +63,6 @@ export default {
       );
     }
 
-    return new Promise((resolve, reject) => reject());
+    return new Promise((resolve) => resolve(''));
   },
 };

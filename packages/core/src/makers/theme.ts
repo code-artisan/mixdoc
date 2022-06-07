@@ -1,8 +1,8 @@
-import path from 'path';
-import { has, get, snakeCase, isFunction } from 'lodash';
 import jetpack from 'fs-jetpack';
+import path from 'path';
 import generator from '@babel/generator';
 import traverse from '@babel/traverse';
+import { has, get, snakeCase, isFunction, isString } from 'lodash';
 import { jsonToMarkdownTable, getAbstractTree } from '../utils';
 
 const columns = {
@@ -53,12 +53,23 @@ export default {
       }
     }
 
+    let result = [...properties];
+
     const { onFetchComponentThemeVariable } = options;
 
+    let response;
     if (isFunction(onFetchComponentThemeVariable)) {
-      return onFetchComponentThemeVariable(component, properties, options.index);
+      response = onFetchComponentThemeVariable(component, properties, options.index);
     }
 
-    return properties.length > 0 ? jsonToMarkdownTable({ alias: columns, rows: properties }) : '';
+    if (isString(response)) {
+      return response;
+    }
+
+    if (Array.isArray(response)) {
+      result = [...response];
+    }
+
+    return result.length > 0 ? jsonToMarkdownTable({ alias: columns, rows: result }) : '';
   },
 };

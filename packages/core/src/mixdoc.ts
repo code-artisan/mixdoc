@@ -7,7 +7,8 @@ import { getOriginTemplate, logger } from './utils';
 import jetpack from 'fs-jetpack';
 
 export default (options) => {
-  logger.info('🐞 开始构建。');
+  const result = options.beforeStart?.();
+  const preceding = result instanceof Promise ? result : Promise.resolve();
 
   const makers = {
     theme: options.makers?.theme || ThemeMaker.make,
@@ -30,17 +31,19 @@ export default (options) => {
 
       const output = options.output?.markdown || 'index.zh.md';
       jetpack.write(path.resolve(process.cwd(), options.directory, name, output), document);
-
-      options.onSuccess?.();
     });
   });
 
-  Promise.all(tasks).then((responses) => {
+  logger.info('🐞 开始构建。');
+
+  preceding.then(() => {
+    return Promise.all(tasks);
+  }).then((responses) => {
     logger.info('🎉 构建完成。');
     options.onSuccess?.(responses);
   }).catch((error) => {
     options.onError?.(error);
-    throw new Error(`🐞 [mixdoc error]: ${error.stack}。`);
+    throw new Error(`🐞 [mixdoc error]: ${error?.stack}。`);
   }).finally(() => {
     options.onComplete?.();
   });
