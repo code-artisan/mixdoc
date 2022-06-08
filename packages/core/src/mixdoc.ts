@@ -39,8 +39,8 @@ export default (options) => {
   preceding.then(() => {
     return Promise.all(tasks);
   }).then((responses) => {
-    logger.info('🎉 构建完成。');
     options.onSuccess?.(responses);
+    logger.info('🎉 构建完成。');
   }).catch((error) => {
     options.onError?.(error);
     throw new Error(`🐞 [mixdoc error]: ${error?.stack}。`);
