@@ -22,6 +22,7 @@ const getCustomConfig = (filename: string) => {
         config = isFunction(result) ? result() : result;
       }
     } catch (error) {
+      console.log(error, 'error...');
       throw new Error('🐞 [mixdoc error]: 读取配置文件 .mixdoc.js 失败。');
     }
   }
