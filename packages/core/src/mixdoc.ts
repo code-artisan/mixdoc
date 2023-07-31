@@ -12,6 +12,7 @@ type Component = {
 };
 
 type MixdocOption = {
+  directory?: string;
   beforeStart?: () => Promise<any> | any;
   makers?: {
     theme?: (name: string, options: MixdocOption) => string;
@@ -61,7 +62,7 @@ export default (options: MixdocOption) => {
       }
 
       const output = options.output?.filename || 'index.zh.md';
-      jetpack.write(path.resolve(process.cwd(), options.output?.path, name, output), document);
+      jetpack.write(path.resolve(options.directory, name, output), document);
     });
   });
 

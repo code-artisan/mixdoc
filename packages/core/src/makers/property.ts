@@ -72,7 +72,6 @@ const format = rows => {
 export default {
   /**
   * 解析出组件的 API 表格。
-  * @param {string} directory 地址前缀
   * @param {string} component 组件名称
   * @param {object} options
   * @returns
