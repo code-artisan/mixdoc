@@ -81,9 +81,7 @@ export default {
     const { onFetchComponentProperty } = options;
 
     const filepath = path.resolve(
-      process.cwd(),
-      'node_modules',
-      options.libSourceCodeWorkspace,
+      options.workspace,
       component,
       options?.property?.filename || 'interface.ts'
     );

@@ -15,9 +15,7 @@ export default {
   make: (component, options) => {
     const snake = snakeCase(component).replace(/-/g, '_');
     const filepath = path.resolve(
-      process.cwd(),
-      'node_modules',
-      options.libSourceCodeWorkspace,
+      options.workspace,
       component,
       options?.theme?.filename || 'style/theme.ts'
     );

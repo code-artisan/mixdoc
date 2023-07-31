@@ -1,3 +1,4 @@
+const path = require('path');
 const dotenv = require('dotenv');
 
 dotenv.config();
@@ -9,7 +10,7 @@ module.exports = () => {
     // ht2xul/heau8f
     namespace: process.env.NAMESPACE,
     directory: 'docs/components',
-    libSourceCodeWorkspace: '@mixdoc/ui/lib',
+    workspace: path.resolve(__dirname, 'node_modules/@mixdoc/ui/lib'),
     components: [
       {
         name: 'avatar',
