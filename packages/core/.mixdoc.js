@@ -8,6 +8,9 @@ module.exports = () => {
     directory: 'docs/components',
     // 组件库的源码目录，需要真实安装对应的组件库，以保证生成的文档内容跟实际的 API 之类的一致。
     workspace: path.resolve(__dirname, 'node_modules/@mixdoc/ui/lib'),
+
+    useDesignMaker: true,
+
     // 组件列表
     components: [
       // ...

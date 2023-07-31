@@ -6,7 +6,33 @@ import PropertyMaker from './makers/property';
 import { getOriginTemplate, logger } from './utils';
 import jetpack from 'fs-jetpack';
 
-export default (options) => {
+type Component = {
+  name: string;
+  slug?: string;
+};
+
+type MixdocOption = {
+  beforeStart?: () => Promise<any> | any;
+  makers?: {
+    theme?: (name: string, options: MixdocOption) => string;
+    design?: (component: Component, options: MixdocOption) => Promise<string>;
+    property?: (name: string, options: MixdocOption) => string;
+  };
+  components: Component[];
+  useDesignMaker?: boolean;
+  theme?: {
+    filepath?: string;
+  };
+  output?: {
+    path?: string;
+    filename?: string;
+  };
+  onSuccess?: (responses: any) => void;
+  onError?: (responses: any) => void;
+  onComplete?: () => void;
+};
+
+export default (options: MixdocOption) => {
   const result = options.beforeStart?.();
   const preceding = result instanceof Promise ? result : Promise.resolve();
 
@@ -18,10 +44,15 @@ export default (options) => {
 
   const components = options.components || [];
 
-  const tasks = map(components, ({ name, slug }) => {
+  const tasks = map(components, ({ name, slug }: Component) => {
     let document = getOriginTemplate(name, options);
 
-    return makers.design({ name, slug }, options).then((response) => {
+    let task = new Promise((resolve) => resolve(''));
+    if (options.useDesignMaker) {
+      task = makers.design({ name, slug }, options);
+    }
+
+    return task.then((response) => {
       document = document.replace('<!-- design-doc -->', response);
       document = document.replace('<!-- api-doc -->', makers.property(name, options));
 
@@ -29,8 +60,8 @@ export default (options) => {
         document = document.replace('<!-- theme-doc -->', makers.theme(name, options));
       }
 
-      const output = options.output?.markdown || 'index.zh.md';
-      jetpack.write(path.resolve(process.cwd(), options.directory, name, output), document);
+      const output = options.output?.filename || 'index.zh.md';
+      jetpack.write(path.resolve(process.cwd(), options.output?.path, name, output), document);
     });
   });
 

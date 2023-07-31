@@ -32,7 +32,7 @@ const getCustomConfig = (filename: string) => {
 program
   .version(version)
   .command('build')
-  .description('通用的组件库文档工具，可以用于同步组件属性、设计文档以及主题变量。')
+  .description('The general component library document tool.')
   .option('--config', 'config file path', '.mixdoc.js')
   .action((options) => {
     mixdoc(merge(defaultMixdocConfig(), getCustomConfig(options.config)));

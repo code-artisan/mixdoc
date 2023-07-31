@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-import { parse } from '@babel/parser';
+import { parse, ParserOptions } from '@babel/parser';
 
-export const getAbstractTree = (code) => {
-  const options: any = {
+export const getAbstractTree = (code: string) => {
+  const options: ParserOptions = {
     plugins: ['typescript'],
     sourceType: 'module',
   };

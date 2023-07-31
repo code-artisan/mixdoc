@@ -28,11 +28,11 @@ const pattern = /!\[(.*?)\]\((.*?)\)/mg;
 export default {
   make: ({ slug, name }, options) => {
     if (typeof options.token !== 'string') {
-      throw new Error('🐞 [mixdoc error]: token 不能为空，请填写 token。');
+      throw new Error('🐞 [mixdoc error]: token can not be empty.');
     }
 
     if (typeof options.namespace !== 'string') {
-      throw new Error('🐞 [mixdoc error]: namespace 不能为空，请填写 namespace。');
+      throw new Error('🐞 [mixdoc error]: namespace can not be empty.');
     }
 
     if (typeof slug === 'string') {

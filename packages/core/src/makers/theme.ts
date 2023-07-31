@@ -12,11 +12,11 @@ const columns = {
 };
 
 export default {
-  make: (component, options) => {
-    const snake = snakeCase(component).replace(/-/g, '_');
+  make: (name: string, options) => {
+    const snake = snakeCase(name).replace(/-/g, '_');
     const filepath = path.resolve(
       options.workspace,
-      component,
+      name,
       options?.theme?.filename || 'style/theme.ts'
     );
 
@@ -57,7 +57,7 @@ export default {
 
     let response;
     if (isFunction(onFetchComponentThemeVariable)) {
-      response = onFetchComponentThemeVariable(component, properties, options.index);
+      response = onFetchComponentThemeVariable(name, properties, options.index);
     }
 
     if (isString(response)) {

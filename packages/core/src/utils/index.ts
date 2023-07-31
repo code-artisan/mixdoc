@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import axios from 'axios';
-import { first, isFunction } from 'lodash';
+import { first, isFunction, isString } from 'lodash';
 import jetpack from 'fs-jetpack';
 import logger from './logger';
 
@@ -11,7 +11,7 @@ export * from './json';
 
 export { default as logger } from './logger';
 
-export const download = async (url, directory, name) => {
+export const download = async (url: string, directory: string, name: string) => {
   const filename = first(name.split('#'));
   const filepath = path.resolve(directory, filename);
 
@@ -30,8 +30,8 @@ export const download = async (url, directory, name) => {
   });
 }
 
-export const getOriginTemplate = (name, options) => {
-  let template = '';
+export const getOriginTemplate = (name: string, options) => {
+  let template;
 
   const { originDocumentReader } = options;
   if (isFunction(originDocumentReader)) {
@@ -61,5 +61,9 @@ export const getOriginTemplate = (name, options) => {
     }
   }
 
-  return template;
+  if (!isString(template)) {
+    logger.warn(`🐞 [mixdoc warning]: can not find component template file: ${name}`);
+  }
+
+  return isString(template) ? template : '';
 }

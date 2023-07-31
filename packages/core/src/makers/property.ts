@@ -5,7 +5,7 @@ import traverse from '@babel/traverse';
 import { get, isFunction, isString, isPlainObject } from 'lodash';
 import { getAbstractTree } from '../utils';
 
-const getRawTables = (content, component) => {
+const getRawTables = (content: string, component: string) => {
   const tables = {};
 
   traverse(getAbstractTree(content), {
@@ -77,7 +77,7 @@ export default {
   * @param {object} options
   * @returns
   */
-  make: (component, options) => {
+  make: (component: string, options) => {
     const { onFetchComponentProperty } = options;
 
     const filepath = path.resolve(
