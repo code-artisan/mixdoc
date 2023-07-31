@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = () => {
   return {
     // 你可以把组件的设计文档存放在雨雀上，然后配置以下信息授权给 mixdoc 进行拉取设计文档的内容。
