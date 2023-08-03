@@ -45,24 +45,27 @@ export default (options: MixdocOption) => {
 
   const components = options.components || [];
 
-  const tasks = map(components, ({ name, slug }: Component) => {
-    let document = getOriginTemplate(name, options);
+  const tasks = map(components, (item: string | Component) => {
+    const name = typeof item === 'string' ? item : item.name;
+    const slug = typeof item === 'string' ? null : item.slug;
+
+    let docs = getOriginTemplate(name, options);
 
     let task = new Promise((resolve) => resolve(''));
-    if (options.useDesignMaker) {
+    if (options.useDesignMaker && isString(slug)) {
       task = makers.design({ name, slug }, options);
     }
 
     return task.then((response) => {
-      document = document.replace('<!-- design-doc -->', response);
-      document = document.replace('<!-- api-doc -->', makers.property(name, options));
+      docs = docs.replace('<!-- design-doc -->', response);
+      docs = docs.replace('<!-- api-doc -->', makers.property(name, options));
 
       if (isString(options.theme?.filepath)) {
-        document = document.replace('<!-- theme-doc -->', makers.theme(name, options));
+        docs = docs.replace('<!-- theme-doc -->', makers.theme(name, options));
       }
 
       const output = options.output?.filename || 'index.zh.md';
-      jetpack.write(path.resolve(options.directory, name, output), document);
+      jetpack.write(path.resolve(options.directory, name, output), docs);
     });
   });
 
