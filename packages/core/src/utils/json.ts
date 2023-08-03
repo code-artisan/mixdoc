@@ -21,7 +21,7 @@ export const jsonToMarkdownTable = (options: Options) => {
     markdown[index] = keys.map((key) => {
       const value = (row[key] || '').length === 0 ? '--' : row[key];
 
-      return typeof value === 'string' ? value.replace(/\|/g, '\\|') : '';
+      return typeof value === 'string' ? value : '';
     });
   });
 
