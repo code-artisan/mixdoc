@@ -78,22 +78,19 @@ const toTable = (rows: any[]) => {
     platform: '适配平台'
   };
 
-  return jsonToMarkdownTable({ alias, rows });
-//   let template = `
-// | 参数 | 备注 | 类型 | 默认值 | 是否必填 | 版本 | 适配平台 |
-// |------|------|------|--------|----------|------|----------|
-// |      |      |      |        |          |      |          |
-// `;
-
-//   const rows = attrs.map((attr) => {
-//     return `|${attr.name}|${attr.description}|${attr.type}|${attr.defaults}|${attr.required}|${attr.version}|${attr.platform}|`;
-//   });
-
-//   return `${template}${rows.join('\n')}`;
+  return `
+    <div class="mixdoc-property-table">
+      ${jsonToMarkdownTable({ alias, rows })}
+    </div>
+  `;
 };
 
 const toList = (attrs: any[]) => {
-  return attrs.map((attr) => `### ${attr.name} \n${attr.description}\n\n默认值：${attr.defaults || '--'}\n\n|required|type|platform|\n|----|----|----|\n|${attr.required}|${attr.type}|${attr.platform}|\n`).join('\n');
+  const rows = attrs.map((attr) => {
+    return `### ${attr.name} \n${attr.description}\n\n默认值：${attr.defaults || '--'}\n\n|required|type|platform|\n|----|----|----|\n|${attr.required}|${attr.type}|${attr.platform}|\n`;
+  });
+
+  return `<div class="mixdoc-property-list">${rows.join('\n')}</div>`;
 };
 
 export default {
