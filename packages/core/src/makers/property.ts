@@ -3,7 +3,7 @@ import jetpack from 'fs-jetpack';
 import generator from '@babel/generator';
 import traverse from '@babel/traverse';
 import { get, isFunction, isString, isPlainObject } from 'lodash';
-import { getAbstractTree } from '../utils';
+import { getAbstractTree, jsonToMarkdownTable } from '../utils';
 
 const getRawTables = (content: string, component: string) => {
   const tables = {};
@@ -24,6 +24,7 @@ const getRawTables = (content: string, component: string) => {
         const json = {
           name: '',
           type: '',
+          version: '',
           platform: '',
           required: 'false',
           description: '',
@@ -43,6 +44,8 @@ const getRawTables = (content: string, component: string) => {
                   json.defaults = value.replace(/^@default[\s]*/, '');
                 } else if (value.startsWith('@ignore')) {
                   json.ignored = true;
+                } else if (value.startsWith('@version')) {
+                  json.version = value.replace(/^@version[\s]*/, '');
                 } else {
                   json.description += `${value.replace(/^@desc[\s]*/, '')}`;
                 }
@@ -65,8 +68,32 @@ const getRawTables = (content: string, component: string) => {
   return tables;
 };
 
-const format = rows => {
-  return rows.map(row => `### ${row.name} \n${row.description}\n\n默认值：${row.defaults || '--'}\n\n|required|type|platform|\n|----|----|----|\n|${row.required}|${row.type}|${row.platform}|\n`).join('\n');
+const toTable = (rows: any[]) => {
+  const alias = {
+    name: '参数',
+    defaults: '默认值',
+    type: '类型',
+    required: '是否必填',
+    version: '版本',
+    platform: '适配平台'
+  };
+
+  return jsonToMarkdownTable({ alias, rows });
+//   let template = `
+// | 参数 | 备注 | 类型 | 默认值 | 是否必填 | 版本 | 适配平台 |
+// |------|------|------|--------|----------|------|----------|
+// |      |      |      |        |          |      |          |
+// `;
+
+//   const rows = attrs.map((attr) => {
+//     return `|${attr.name}|${attr.description}|${attr.type}|${attr.defaults}|${attr.required}|${attr.version}|${attr.platform}|`;
+//   });
+
+//   return `${template}${rows.join('\n')}`;
+};
+
+const toList = (attrs: any[]) => {
+  return attrs.map((attr) => `### ${attr.name} \n${attr.description}\n\n默认值：${attr.defaults || '--'}\n\n|required|type|platform|\n|----|----|----|\n|${attr.required}|${attr.type}|${attr.platform}|\n`).join('\n');
 };
 
 export default {
@@ -97,6 +124,12 @@ export default {
         return response;
       }
 
+      if (isPlainObject(response)) {
+        result = { ...response };
+      }
+
+      const formatter = get(options.output, 'layout.property') === 'table' ? toTable : toList;
+
       const iterator = (key) => {
         const rows = result[key];
 
@@ -104,13 +137,8 @@ export default {
           return '';
         }
 
-        return key === 'default' ? format(rows) : `### ${key}\n\n${format(rows)}`;
+        return key === 'default' ? formatter(rows) : `### ${key}\n\n${formatter(rows)}`;
       };
-
-      if (isPlainObject(response)) {
-        result = { ...response };
-      }
-
       return Object.keys(result).map(iterator).join('\n\n\n') || '';
     }
 

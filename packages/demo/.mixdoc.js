@@ -10,6 +10,7 @@ module.exports = () => {
     // ht2xul/heau8f
     namespace: process.env.NAMESPACE,
     directory: 'docs/components',
+    useDesignMaker: false,
     workspace: path.resolve(__dirname, 'node_modules/@mixdoc/ui/lib'),
     components: [
       {

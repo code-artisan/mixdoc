@@ -33,7 +33,10 @@ module.exports = () => {
     output: {
       // 图片输出目录，仅 shouldReplaceRemoteImageSourceToLocale 为 true 时有效
       image: 'images',
-      markdown: 'index.zh.md',
+      layout: {
+        property: 'list',
+      },
+      filename: 'index.zh.md',
     },
     // 当获取设计文档的内容时，会触发此回调
     onFetchDesignDraft() {},

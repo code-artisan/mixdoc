@@ -1,4 +1,11 @@
-export const jsonToMarkdownTable = (options) => {
+type Options = {
+  alias?: {
+    [key: string]: string;
+  },
+  rows: any[];
+};
+
+export const jsonToMarkdownTable = (options: Options) => {
   const { alias = {}, rows } = options;
 
   const markdown = [];

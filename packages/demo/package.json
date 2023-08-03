@@ -50,7 +50,7 @@
   "dependencies": {
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
-    "@mixdoc/cli": "^1.0.2",
+    "@mixdoc/cli": "^1.0.9",
     "@mixdoc/ui": "^1.0.2",
     "@react-navigation/bottom-tabs": "^5.11.15",
     "@react-navigation/compat": "^5.3.20",
